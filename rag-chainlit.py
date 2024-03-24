@@ -25,9 +25,9 @@ rag_prompt = ChatPromptTemplate.from_template(prompt_template)
 
 def load_model():
     llm = Ollama(
-        model="gemma:2b",
+        # model="gemma:2b",
         # model="mistral",
-        # model="llama2:13b",
+        model="llama2:13b",
         # model="mistral-openorca",
         verbose=True,
         callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),

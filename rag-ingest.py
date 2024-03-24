@@ -1,12 +1,24 @@
+# Notes
+# Create python virtual environment and activate it
+# python -m venv venv
+# Install following dependencies withint the venv
+# pip install langchain langchain-community langchain-core
+# pip install chromadb
+# pip install chainlit
+# pip install sentence-transformers nltk
 # keep data in data folder
 # run this program before running chainlit program
+# python .\rag-ingest.py
 # ensure that ollama server is running
+# run chainlit program
+# chainlit run .\rag-chainlit.py
 
 import os
 import warnings
 from chromadb.config import Settings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import NLTKTextSplitter
+from langchain_text_splitters import SentenceTransformersTokenTextSplitter
 from langchain_community.document_loaders import (
     DirectoryLoader,
     TextLoader,
@@ -27,9 +39,18 @@ def create_vector_database():
     loaded_documents = pdf_loader.load()
 
     # text_splitter = RecursiveCharacterTextSplitter(
-    #     chunk_size=500, chunk_overlap=40)
-    text_splitter = NLTKTextSplitter()
+    #     chunk_size=512, chunk_overlap=0, length_function=len)
+    # text_splitter = NLTKTextSplitter()
+    text_splitter = SentenceTransformersTokenTextSplitter(chunk_overlap=0)
     chunked_documents = text_splitter.split_documents(loaded_documents)
+
+    # print("\nBEGIN=============================================================")
+    # print(len(chunked_documents))
+    # for doc in chunked_documents:
+    #     print(doc.page_content)
+    #     print("\n>>>>>")
+    # print("\nEND=============================================================")
+
     ollama_embeddings = OllamaEmbeddings(model="nomic-embed-text")
 
     vector_database = Chroma.from_documents(
