@@ -1,3 +1,7 @@
+# keep data in data folder
+# run this program before running chainlit program
+# ensure that ollama server is running
+
 import os
 import warnings
 from chromadb.config import Settings

@@ -1,3 +1,5 @@
+# chainlit run <python program>
+
 import os
 from langchain import hub
 from chromadb.config import Settings
