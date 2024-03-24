@@ -1,0 +1,8 @@
+db-txt
+dump
+venv
+chainlit.md
+environment.env
+__*
+.chainlit
+data
