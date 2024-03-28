@@ -6,3 +6,4 @@ environment.env
 __*
 .chainlit
 data
+.files
